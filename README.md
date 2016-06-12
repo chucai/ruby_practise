@@ -5,3 +5,5 @@
 - [ ] TracePoint
 - [ ] set_trace_func
 - [ ] RubyVM
+- [ ] bind
+- [ ] function pragram
