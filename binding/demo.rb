@@ -30,4 +30,12 @@ puts b1.class # => Binding
 puts b1.eval("@secret")  # 在上下文中执行该语句
 puts b1.eval("hello")
 
-binding.pry
+# 传递上下文到另外的object
+
+def foo(binding_context)
+  binding_context.eval("@secret")
+end
+
+puts foo b1
+puts foo b2
+
