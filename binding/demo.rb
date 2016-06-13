@@ -38,4 +38,3 @@ end
 
 puts foo b1
 puts foo b2
-
