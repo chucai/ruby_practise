@@ -1,5 +1,7 @@
 # ObjectSpace 能访问Ruby VM的堆中的所有的对象
-require "objspace" # 增强默认的ObjectSpace的能力
+# 不但可以用来分析对象，还可以用来分析堆(heap)
+# 增强默认的ObjectSpace的能力
+require "objspace"
 
 ObjectSpace.trace_object_allocations_start
 
