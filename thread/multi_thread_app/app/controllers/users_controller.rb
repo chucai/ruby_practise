@@ -20,7 +20,6 @@ class UsersController < ApplicationController
   def show
     Thread.new {
       # 延长thread的生命周期
-      sleep 100
       User.value += 1
       logger.info "线程会执行#{User.value}"
     }
