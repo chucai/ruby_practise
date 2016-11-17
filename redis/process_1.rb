@@ -1,13 +1,15 @@
 require 'redis'
+require 'thread'
 
 $redis = Redis.new # 使用默认的配置
+$lock = Mutex.new
 
 def do_self_work
   puts "我在做自己的工作"
   sleep 1
 end
 
-$queue = [] # 全局变量，保存任务信息
+$queue = [] # 任务队列，全局变量，保存任务信息
 
 def main
 
@@ -19,7 +21,9 @@ def main
       end
 
       on.message do |channel, msg|
-        $queue << msg
+        $lock.synchronize do
+          $queue << msg
+        end
       end
     end
   end
@@ -27,8 +31,10 @@ def main
   # 程序不会结束
   loop do
     unless $queue.empty?
-      value = $queue.shift
-      puts value
+      $lock.synchronize do
+        value = $queue.shift
+        puts value
+      end
     end
     do_self_work
   end
